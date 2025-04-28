@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
@@ -17,10 +18,11 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->enum('role', ['admin', 'staff', 'customer'])->default('customer');
-            $table->enum('status', ['verify', 'active', 'banned']);
+            $table->enum('Status', ['verify', 'active', 'banned']);
             $table->string('password');
             $table->rememberToken();
-            $table->timestamps();
+            $table->dateTime('CreatedDate')->nullable();
+            $table->dateTime('LastUpdatedDate')->nullable();
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {

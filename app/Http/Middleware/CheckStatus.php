@@ -15,9 +15,9 @@ class CheckStatus
      */
     public function handle(Request $request, Closure $next)
     {
-        if($request->user()->status == 'active'){
+        if($request->user()->Status == 'active'){
             return $next($request);
-        }elseif($request->user()->status == 'verify'){
+        }elseif($request->user()->Status == 'verify'){
             return redirect('/verify');
         }
         return abort(403, 'Unauthorized action.');

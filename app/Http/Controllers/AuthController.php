@@ -34,7 +34,7 @@ class AuthController extends Controller
             'confirm_password' => 'required|max:50|min:8|same:password',
         ]);
 
-        $request['status'] = "verify";
+        $request['Status'] = "verify";
         $user = User::create($request->all());
         Auth::login($user);
         return redirect('/customer');
@@ -54,16 +54,16 @@ class AuthController extends Controller
                 'name' => $googleUser->name,
                 'email' => $googleUser->email,
                 'password' => bcrypt(Str::random(16)),
-                'status' => 'active'
+                'Status' => 'active'
             ]);
         }
 
-        if ($user && $user->status == 'banned') {
+        if ($user && $user->Status == 'banned') {
             return redirect('/login')->with('failed', 'akun anda telah dibekukan');
         }
 
-        if ($user && $user->status == 'verify') {
-            $user->update(['status' => 'active']);
+        if ($user && $user->Status == 'verify') {
+            $user->update(['Status' => 'active']);
         }
 
         Auth::login($user);

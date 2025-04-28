@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Mail\OtpEmail;
 use App\Models\Verification;
 use GuzzleHttp\Promise\Create;
-use Illuminate\Foundation\Auth\User;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -43,14 +43,14 @@ class VerificationController extends Controller
             DB::beginTransaction();
             // Bandingkan OTP
             if (!Hash::check(trim($request->otp), $verify->otp)) {
-                $verify->update(['status' => 'invalid']);
+                $verify->update(['Status' => 'invalid']);
                 return redirect('/verify')->with('error', 'Kode OTP salah');
             }
 
             // Jika cocok
-            // $verify->update(['status' => 'valid']);
+            // $verify->update(['Status' => 'valid']);
             $verify->delete();
-            User::whereId($verify->user_id)->update(['status' => 'active']);
+            User::whereId($verify->user_id)->update(['Status' => 'active']);
 
 
             DB::commit();

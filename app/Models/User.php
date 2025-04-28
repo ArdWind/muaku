@@ -6,6 +6,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Traits\HasCustomTimestamps;
 
 class User extends Authenticatable
 {
@@ -17,11 +18,19 @@ class User extends Authenticatable
      *
      * @var list<string>
      */
+
+    // Menonaktifkan timestamps default
+    public $timestamps = false;
+
+    // Rename kolom timestamp default
+    const CREATED_AT = 'CreatedDate';
+    const UPDATED_AT = 'LastUpdatedDate';
+
     protected $fillable = [
         'name',
         'email',
         'role',
-        'status',
+        'Status',
         'password',
     ];
 
