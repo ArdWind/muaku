@@ -22,8 +22,12 @@ return new class extends Migration
             $table->enum('send_via', ['email', 'sms', 'wa']);
             $table->integer('resend')->default(0);
             $table->enum('Status', ['active', 'valid', 'invalid']);
-            $table->dateTime('CreatedDate')->nullable();
+            $table->dateTime('CreatedDate')->useCurrent(); // default: now()
             $table->dateTime('LastUpdatedDate')->nullable();
+            $table->string('CompanyCode', 20)->nullable();
+            $table->tinyInteger('IsDeleted')->nullable();
+            $table->string('CreatedBy', 32)->default('system');
+            $table->string('LastUpdatedBy', 32)->nullable();
         });
     }
 

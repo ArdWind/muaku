@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>MUA.KU</title>
     <link rel="stylesheet" href="{{ asset('asset/cust/CustStyle.css') }}">
+    <link rel="icon" href="{{ asset('/asset/cust/icolight.png') }}" type="image/png">
 </head>
 <body>
     <header>
@@ -13,26 +14,26 @@
             <a href="">Contacts</a>
             <a href="">Info</a>
         </nav> --}}
-      <nav class="glass-nav">
-        <!-- logo -->
-        <div class="HeaderLogo">
-          <img class="Logo1" src="/asset/cust/ico1.png" alt="Logo">
-        </div>
+        <nav class="glass-nav">
+            <!-- logo -->
+            <div class="HeaderLogo">
+                <img class="Logo1" src="/asset/cust/ico1.png" alt="Logo">
+            </div>
 
-        <div class="HeaderMenu">
-          <a href="">Home</a>
-          <a href="">Contacts</a>
-          <a href="">Info</a>
-        </div>
+            <div class="HeaderMenu">
+                <a href="">Home</a>
+                <a href="">Contacts</a>
+                <a href="">Info</a>
+            </div>
 
-        <!-- Kanan: Hallo, User + Logout -->
-        <div class="HeaderUser">
-          <a>Hallo, {{auth()->user()->name}}</a>
-          <a href="/logout" class="nav-link">
-            <p>Logout</p>
-          </a>
-        </div>
-      </nav>
+            <!-- Kanan: Hallo, User + Logout -->
+            <div class="HeaderUser">
+                <a>Hallo, {{auth()->user()->name}}</a>
+                <a href="/logout" class="nav-link">
+                    <p>Logout</p>
+                </a>
+            </div>
+        </nav>
     </header>
 
     <!-- carousel -->

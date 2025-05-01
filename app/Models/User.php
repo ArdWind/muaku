@@ -32,6 +32,10 @@ class User extends Authenticatable
         'role',
         'Status',
         'password',
+        'CreatedDate',
+        'CreatedBy',
+        'LastUpdatedDate',
+        'LastUpdatedBy',
     ];
 
     /**

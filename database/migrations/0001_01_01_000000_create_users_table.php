@@ -21,8 +21,12 @@ return new class extends Migration
             $table->enum('Status', ['verify', 'active', 'banned']);
             $table->string('password');
             $table->rememberToken();
-            $table->dateTime('CreatedDate')->nullable();
+            $table->dateTime('CreatedDate')->useCurrent(); // default: now()
             $table->dateTime('LastUpdatedDate')->nullable();
+            $table->string('CompanyCode', 20)->nullable();
+            $table->tinyInteger('IsDeleted')->nullable();
+            $table->string('CreatedBy', 32)->default('system');
+            $table->string('LastUpdatedBy', 32)->nullable();
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {
