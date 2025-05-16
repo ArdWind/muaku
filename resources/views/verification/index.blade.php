@@ -15,24 +15,42 @@
   <link rel="stylesheet" href="{{asset('adminlte/dist/css/adminlte.min.css')}}">
 </head>
 <body class="hold-transition login-page">
+<!-- PERBAIKAN: Tambahkan tag div untuk .login-box -->
 <div class="login-box">
   <div class="login-logo">
     <b>Verification</b>
   </div>
   <!-- /.login-logo -->
+  <!-- PERBAIKAN: Tambahkan tag div untuk .card -->
   <div class="card">
     <div class="card-body login-card-body">
 
-    @if (session('failed'))
-      <div class="alert alert-danger">{{ session('failed') }}</div>
-    @endif
+      @if (session('failed'))
+        <div class="alert alert-danger">{{ session('failed') }}</div>
+      @endif
 
       <p class="login-box-msg">Please verify your account!</p>
+
+      <!-- Form Pilihan Channel -->
       <form action="/verify" method="post">
         @csrf
-        <input type="hidden" value="register" name="type">
-        <button type="submit", class="btn btn-sm btn-primary">Send OTP to your email</button>
+        <input type="hidden" name="type" value="register">
+
+        <div class="form-group">
+          <label>Pilih Metode Verifikasi:</label>
+          <div class="custom-control custom-radio">
+            <input class="custom-control-input" type="radio" id="email" name="send_via" value="email" checked>
+            <label for="email" class="custom-control-label">Kirim via Email</label>
+          </div>
+          <div class="custom-control custom-radio">
+            <input class="custom-control-input" type="radio" id="whatsapp" name="send_via" value="whatsapp">
+            <label for="whatsapp" class="custom-control-label">Kirim via WhatsApp</label>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-sm btn-primary">Kirim OTP</button>
       </form>
+
     </div>
     <!-- /.login-card-body -->
   </div>

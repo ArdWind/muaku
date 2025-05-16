@@ -16,8 +16,8 @@ class DataUserController extends Controller
     public function DataUserView()
     {
         $users = User::all();
-        $products = Product::all(); // <- ini penting
-        return view('data', compact('users', 'products')); // arahkan ke data.blade.php
+        // $products = Product::all(); // <- ini penting
+        return view('data_users.indexUsers', compact('users'));
     }
 
     /**

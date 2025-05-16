@@ -20,11 +20,12 @@ return new class extends Migration
             $table->enum('role', ['admin', 'staff', 'customer'])->default('customer');
             $table->enum('Status', ['verify', 'active', 'banned']);
             $table->string('password');
+            $table->string('Phone', 32)->nullable();
             $table->rememberToken();
             $table->dateTime('CreatedDate')->useCurrent(); // default: now()
             $table->dateTime('LastUpdatedDate')->nullable();
-            $table->string('CompanyCode', 20)->nullable();
-            $table->tinyInteger('IsDeleted')->nullable();
+            $table->string('CompanyCode', 20)->default('1');
+            $table->tinyInteger('IsDeleted')->default('1');
             $table->string('CreatedBy', 32)->default('system');
             $table->string('LastUpdatedBy', 32)->nullable();
         });

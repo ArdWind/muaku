@@ -43,6 +43,11 @@
                                 </div>
 
                                 <div class="form-group">
+                                    <label>Phone</label>
+                                    <input type="tel" name="Phone" class="form-control" required>
+                                </div>
+
+                                <div class="form-group">
                                     <label>Role</label>
                                     <select name="role" class="form-control" required>
                                         <option value="admin">Admin</option>

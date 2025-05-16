@@ -32,6 +32,7 @@ class User extends Authenticatable
         'role',
         'Status',
         'password',
+        'Phone',
         'CreatedDate',
         'CreatedBy',
         'LastUpdatedDate',

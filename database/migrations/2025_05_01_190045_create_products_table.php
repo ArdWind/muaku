@@ -24,8 +24,8 @@ return new class extends Migration
             $table->string('CreatedBy', 32)->default('system');
             $table->dateTime('LastUpdatedDate')->nullable();
             $table->string('LastUpdatedBy', 32)->nullable();
-            $table->string('CompanyCode', 20)->nullable();
-            $table->tinyInteger('IsDeleted')->nullable();
+            $table->string('CompanyCode', 20)->default('1');
+            $table->tinyInteger('IsDeleted')->default('1');
         });
     }
 

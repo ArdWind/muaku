@@ -1,8 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 body {
     margin: 0;
-    background-color: #000;
-    color: #eee;
+    background-color: #f4f6f9;
+    color: #212529;
     font-family: Poppins;
     font-size: 12px;
 }
@@ -35,7 +35,8 @@ nav {
 .glass-nav {
     background-color: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(3px);
-    padding: 5px;
+    padding: 10px 5px;
+    margin-top: 50px;
     border-radius: 8px;
     color: rgb(255, 255, 255);
 }
@@ -46,6 +47,10 @@ header a {
     text-decoration: none;
     font-style: inherit;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+header a:hover {
+    color: #F09132; /* warna saat hover */
 }
 
 .HeaderLogo {

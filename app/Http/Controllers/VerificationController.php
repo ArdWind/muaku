@@ -11,8 +11,9 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Mail as FacadesMail;
-use Mail;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 
 class VerificationController extends Controller
 {
@@ -64,24 +65,111 @@ class VerificationController extends Controller
 
     public function store(Request $request)
     {
-        if ($request->type == 'register') {
-            $user = User::find($request->user()->id);
-        } else {
-            // $user = reset password
-        }
-        if (!$user) return back()->with('failed', 'user not found.');
-        $otp = rand(100000, 999999);
-        $verify = Verification::create([
-            'user_id' => $user->id,
-            'unique_id' => uniqid(),
-            'otp' =>  Hash::make($otp),
-            'type' => $request->type,
-            'send_via' => 'email'
+        // Validasi request
+        $request->validate([
+            'type' => 'required|in:register,reset_password',
+            'send_via' => 'required|in:email,whatsapp'
         ]);
-        FacadesMail::to($user->email)->queue(new OtpEmail($otp));
+
+        // Cari user berdasarkan konteks
         if ($request->type == 'register') {
-            return redirect('/verify/' . $verify->unique_id);
+            $user = User::find(Auth::id());
+        } else {
+            // Untuk reset password (contoh pencarian via email)
+            $user = User::where('email', $request->email)->first();
         }
-        // return redirect('/reset-password');
+
+        // Validasi user
+        if (!$user) {
+            return back()->with('failed', 'User tidak ditemukan');
+        }
+
+        // Validasi nomor WhatsApp jika dikirim via WA
+        if ($request->send_via == 'whatsapp' && empty($user->Phone)) {
+            return back()->with('failed', 'Nomor WhatsApp tidak terdaftar');
+        }
+
+        // Generate OTP
+        $otp = rand(100000, 999999);
+
+        try {
+            DB::beginTransaction();
+
+            // Hapus OTP sebelumnya jika ada
+            Verification::where('user_id', $user->id)
+                ->where('type', $request->type)
+                ->delete();
+
+            // Simpan OTP baru
+            $verify = Verification::create([
+                'user_id' => $user->id,
+                'unique_id' => uniqid(),
+                'otp' => Hash::make($otp),
+                'type' => $request->type,
+                'send_via' => $request->send_via
+            ]);
+
+            // Kirim OTP sesuai channel
+            switch ($request->send_via) {
+                case 'email':
+                    Mail::to($user->email)
+                        ->queue(new OtpEmail($otp));
+                    break;
+
+                case 'whatsapp':
+                    $this->sendWhatsAppOtp(
+                        $user->Phone,
+                        $otp,
+                        $request->type
+                    );
+                    break;
+            }
+
+            DB::commit();
+
+            // Redirect untuk verifikasi
+            if ($request->type == 'register') {
+                return redirect('/verify/' . $verify->unique_id);
+            }
+
+            return redirect('/reset-password')->with('success', 'OTP telah dikirim');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            Log::error('OTP Error: ' . $e->getMessage());
+            return back()->with('failed', 'Gagal mengirim OTP');
+        }
+    }
+
+    private function sendWhatsAppOtp($phoneNumber, $otp, $type)
+    {
+        // Format nomor (62xxxxxxxxxxx)
+        $formattedPhone = preg_replace('/^0/', '62', $phoneNumber);
+        $formattedPhone = preg_replace('/[^0-9]/', '', $formattedPhone);
+
+        // Custom message berdasarkan tipe
+        $messageType = ($type == 'register') ? 'registrasi akun' : 'reset password';
+
+        $text = "[VERIFIKASI KODE OTP MUA.KU]\n\n"
+            . "Kode OTP Anda adalah: {$otp}\n"
+            . "Digunakan untuk {$messageType}\n\n"
+            // . "⏰ Berlaku 5 menit\n"
+            . "JANGAN berikan kode ini ke siapapun!\n\n"
+            . "Terima kasih 🙏";
+
+        // Kirim via API Fonnte
+        $response = Http::post('https://node.kalbe.my.id/api/send-message', [
+            'apikey'   => 'haiojan2542',
+            'mtype'    => 'text',
+            'receiver' => $formattedPhone,
+            'text'     => $text,
+            'url'      => null,
+            'filename' => null,
+        ]);
+
+        // Handle error response
+        if ($response->failed()) {
+            throw new \Exception('Gagal mengirim WhatsApp: ' . $response->body());
+        }
     }
 }
+

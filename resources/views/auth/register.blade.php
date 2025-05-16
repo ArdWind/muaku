@@ -54,6 +54,17 @@
             </div>
           </div>
         </div>
+        @error('phone')
+        <small class="text-danger">{{ $message }}</small>
+        @enderror
+        <div class="input-group mb-3">
+          <input type="tel" name="Phone" class="form-control" placeholder="0812xxxxxxx" value="{{ old('Phone') }}">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-phone"></span>
+            </div>
+          </div>
+        </div>
         @error('password')
         <small class="text-danger">{{ $message }}</small>
         @enderror

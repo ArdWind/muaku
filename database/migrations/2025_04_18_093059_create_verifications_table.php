@@ -19,13 +19,13 @@ return new class extends Migration
             $table->string('unique_id');
             $table->string('otp');
             $table->enum('type', ['register', 'reset_password']);
-            $table->enum('send_via', ['email', 'sms', 'wa']);
+            $table->enum('send_via', ['email', 'sms', 'whatsapp']);
             $table->integer('resend')->default(0);
             $table->enum('Status', ['active', 'valid', 'invalid']);
             $table->dateTime('CreatedDate')->useCurrent(); // default: now()
             $table->dateTime('LastUpdatedDate')->nullable();
-            $table->string('CompanyCode', 20)->nullable();
-            $table->tinyInteger('IsDeleted')->nullable();
+            $table->string('CompanyCode', 20)->default('1');
+            $table->tinyInteger('IsDeleted')->default('1');
             $table->string('CreatedBy', 32)->default('system');
             $table->string('LastUpdatedBy', 32)->nullable();
         });
