@@ -9,6 +9,7 @@ use App\Http\Controllers\DataUserController;
 use App\Http\Controllers\FrontEnd\ProductController as FrontEndProductController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\TestMinioController;
+use App\Http\Controllers\GalleryController;
 
 // data-users
 Route::get('/data-users', [DataUserController::class, 'DataUserView'])->name('data_users.index'); // Tampilkan data user
@@ -26,8 +27,27 @@ Route::get('/data-products/{product}/edit', [ProductController::class, 'edit'])-
 Route::put('/data-products/{product}', [ProductController::class, 'update'])->name('data_products.update'); // Update produk
 Route::delete('/data-products/{product}', [ProductController::class, 'destroy'])->name('data_products.destroy'); // Hapus produk
 
+// data-galeries
+Route::get('/data-galeries', [GalleryController::class, 'index'])->name('data_galeries.index'); // Tampilkan data galeri
+Route::get('/data-galeries/create', [GalleryController::class, 'create'])->name('data_galeries.create'); // Form tambah galeri
+Route::post('/data-galeries', [GalleryController::class, 'store'])->name('data_galeries.store'); // Simpan galeri baru
+Route::get('/data-galeries/{gallery}/edit', [GalleryController::class, 'edit'])->name('data_galeries.edit'); // Form edit galeri
+Route::put('/data-galeries/{gallery}', [GalleryController::class, 'update'])->name('data_galeries.update'); // Update galeri
+Route::delete('/data-galeries/{gallery}', [GalleryController::class, 'destroy'])->name('data_galeries.destroy'); // Hapus galeri
 
-// Route::get('/', [FrontEndProductController::class, 'index'])->name('product.index'); // Tampilkan data produk
+// produk-detail
+Route::get('/detail/wedding', [GalleryController::class, 'weddingDetail'])->name('detail.wedding');
+Route::get('/detail/grad', function () {
+    return view('detail.grad');
+})->name('detail.grad');
+Route::get('/detail/eng', function () {
+    return view('detail.eng');
+})->name('detail.eng');
+Route::get('/detail/braid', function () {
+    return view('detail.braid');
+})->name('detail.braid');
+
+Route::get('/', fn() => view('welcome'));
 
 Route::get('/login', function () {
     return view('auth.login');

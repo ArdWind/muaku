@@ -38,49 +38,59 @@
                 data-accordion="false">
                 <!-- Add icons to the links using the .nav-icon class
             with font-awesome or any other icon font library -->
-                <li class="nav-item">
-                    <a href="/dashboard" class="nav-link {{ request()->is('dashboard') ? 'active' : '' }}">
-                        <i class="nav-icon fas fa-tachometer-alt"></i>
-                        <p>
-                            Dashboard
-                        </p>
-                    </a>
+                @if (in_array(auth()->user()->role, ['admin', 'staff']))
+                    <li class="nav-item">
+                        <a href="/dashboard" class="nav-link {{ request()->is('dashboard') ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-tachometer-alt"></i>
+                            <p>
+                                Dashboard
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item {{ request()->is('data*') ? 'menu-open' : '' }}">
+                        <a href="javascript:void(0);" class="nav-link {{ request()->is('data*') ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-table"></i>
+                            <p>
+                                Data
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                @endif
+                <ul class="nav nav-treeview">
+                    @if (auth()->user()->role == 'admin')
+                        <li class="nav-item">
+                            <a href="/data-users" class="nav-link {{ request()->is('data-users*') ? 'active' : '' }}">
+                                <i class="nav-icon fas fa-user"></i>
+                                <p>Data User</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/data-products"
+                                class="nav-link {{ request()->is('data-products*') ? 'active' : '' }}">
+                                <i class="nav-icon fas fa-th"></i>
+                                <p>Data Produk</p>
+                            </a>
+                        </li>
+                    @elseif (auth()->user()->role == 'staff')
+                        <li class="nav-item">
+                            <a href="/data-galeries"
+                                class="nav-link {{ request()->is('data-galeries*') ? 'active' : '' }}">
+                                <i class="nav-icon fas fa-image"></i>
+                                <p>Galery</p>
+                            </a>
+                        </li>
+                    @endif
+                </ul>
                 </li>
-                <li class="nav-item {{ request()->is('data*') ? 'menu-open' : '' }}">
-                    <a href="javascript:void(0);" class="nav-link {{ request()->is('data*') ? 'active' : '' }}">
-                        <i class="nav-icon fas fa-table"></i>
-                        <p>
-                            Data
-                            <i class="right fas fa-angle-left"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                        @if (auth()->user()->role == 'admin')
-                            <li class="nav-item">
-                                <a href="/data-users"
-                                    class="nav-link {{ request()->is('data-users*') ? 'active' : '' }}">
-                                    <i class="nav-icon fas fa-user"></i>
-                                    <p>Data User</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="/data-products"
-                                    class="nav-link {{ request()->is('data-products*') ? 'active' : '' }}">
-                                    <i class="nav-icon fas fa-th"></i>
-                                    <p>Data Produk</p>
-                                </a>
-                            </li>
-                        @else
-                            <li class="nav-item">
-                                <a href="/data-galery"
-                                    class="nav-link {{ request()->is('data-galery*') ? 'active' : '' }}">
-                                    <i class="nav-icon fas fa-image"></i>
-                                    <p>Galery</p>
-                                </a>
-                            </li>
-                        @endif
-                    </ul>
-                </li>
+                @if (auth()->user()->role == 'customer')
+                    <li class="nav-item">
+                        <a href="/detail/wedding"
+                            class="nav-link {{ request()->is('/detail/wedding*') ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-image"></i>
+                            <p>Detail</p>
+                        </a>
+                    </li>
+                @endif
                 <li class="nav-item">
                     <a href="/logout" class="nav-link">
                         <i class="nav-icon fas fa-power-off"></i>

@@ -50,7 +50,7 @@ header a {
 }
 
 header a:hover {
-    color: #F09132; /* warna saat hover */
+    color: #f09132; /* warna saat hover */
 }
 
 .HeaderLogo {
@@ -229,14 +229,14 @@ header a:hover {
     right: 52%;
     z-index: 100;
     width: 300px;
-    max-width: 30%;
+    max-width: 50%;
     display: flex;
     gap: 10px;
     align-items: center;
 }
 .arrows button {
-    width: 40px;
-    height: 40px;
+    width: 60px;
+    height: 60px;
     border-radius: 50%;
     background-color: #eee4;
     border: none;
@@ -407,4 +407,55 @@ header a:hover {
     .carousel .list .item .content .title {
         font-size: 30px;
     }
+}
+
+/* Section Info Usaha */
+.info-usaha {
+    padding: 50px 20px;
+    background: #FDF3E6;
+    text-align: center;
+}
+
+.info-usaha h2 {
+    font-weight: bold;
+}
+
+.info-usaha p {
+    max-width: 700px;
+    margin: 20px auto;
+}
+
+/* Footer */
+.site-footer {
+    background: #343a40;
+    color: white;
+    padding: 30px 20px;
+}
+
+.site-footer .footer-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.site-footer .footer-section {
+    flex: 1 1 250px;
+    margin-bottom: 20px;
+}
+
+.site-footer .footer-section a {
+    color: white;
+    text-decoration: none;
+}
+
+.site-footer .footer-section a:hover {
+    text-decoration: underline;
+}
+
+.footer-bottom {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 14px;
 }

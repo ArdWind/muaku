@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Product;
+use Illuminate\Support\Facades\Auth;
 
 class DataUserController extends Controller
 {
@@ -41,9 +42,6 @@ class DataUserController extends Controller
             'password_confirmation' => 'required|max:50|min:8|same:password',
             'Status'            => 'nullable|string|max:50',
             'CreatedDate'       => 'nullable|date',
-            'LastUpdatedDate'   => 'nullable|date',
-            'CreatedBy'         => 'nullable|string|max:255',
-            'LastUpdatedBy'     => 'nullable|string|max:255',
         ]);
 
         User::create([
@@ -51,11 +49,10 @@ class DataUserController extends Controller
             'email'             => $request->email,
             'role'              => $request->role,
             'password'          => bcrypt($request->password),
+            'Phone'             => $request->Phone,
             'Status'            => $request->Status,
-            'CreatedDate'       => $request->CreatedDate,
-            'LastUpdatedDate'   => $request->LastUpdatedDate,
-            'CreatedBy'         => $request->CreatedBy,
-            'LastUpdatedBy'     => $request->LastUpdatedBy,
+            'CreatedDate'       => now(),
+            'CreatedBy'         => Auth::user()->name,
         ]);
 
         return redirect()->route('data_users.index')->with('success', 'User berhasil ditambahkan.');
@@ -94,8 +91,9 @@ class DataUserController extends Controller
             'name'              => $request->name,
             'role'              => $request->role,
             'Status'            => $request->Status,
-            'LastUpdatedDate'   => $request->LastUpdatedDate,
-            'LastUpdatedBy'     => $request->LastUpdatedBy,
+            'Phone'             => $request->Phone,
+            'LastUpdatedDate'   => now(), // Set waktu update saat ini
+            'LastUpdatedBy'     => Auth::user()->name, // Set nama user yang melakukan update
         ]);
 
         return redirect()->route('data_users.index')->with('success', 'User berhasil diperbarui.');

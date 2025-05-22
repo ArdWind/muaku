@@ -35,7 +35,7 @@
                             @method('PUT')
 
                             <div class="card-body">
-                                <div class="form-group">
+                                {{-- <div class="form-group">
                                     <label>Kode Produk</label>
                                     <input type="text" name="product_code" class="form-control"
                                         value="{{ old('product_code', $product->product_code) }}" required readonly>
@@ -45,6 +45,23 @@
                                     <label>Nama Produk</label>
                                     <input type="text" name="product_name" class="form-control"
                                         value="{{ old('product_name', $product->product_name) }}" required>
+                                </div> --}}
+
+                                <div class="row">
+                                    <div class="col-sm-6"> {{-- Menggunakan col-sm-6 agar tetap berdampingan di layar kecil (sm) ke atas --}}
+                                        <div class="form-group">
+                                            <label>Kode Produk</label>
+                                            <input type="text" name="product_code" class="form-control"
+                                                value="{{ old('product_code', $product->product_code) }}" required readonly>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6"> {{-- Menggunakan col-sm-6 agar tetap berdampingan di layar kecil (sm) ke atas --}}
+                                        <div class="form-group">
+                                            <label>Nama Produk</label>
+                                            <input type="text" name="product_name" class="form-control"
+                                                value="{{ old('product_name', $product->product_name) }}" required>
+                                        </div>
+                                    </div>
                                 </div>
 
                                 <div class="form-group">
@@ -62,16 +79,34 @@
                                     <small class="text-muted">Biarkan kosong jika tidak ingin mengganti gambar.</small>
                                 </div>
 
-                                <div class="form-group">
+                                {{-- <div class="form-group">
                                     <label>Harga</label>
                                     <input type="number" step="1" name="price" class="form-control"
-                                        value="{{ old('price', $product->price) }}" required>
+                                        value="{{ old('price', number_format($product->price, 0, ',', '.')) }}" required>
                                 </div>
 
                                 <div class="form-group">
                                     <label>Diskon (%)</label>
                                     <input type="number" step="1" name="discount" class="form-control"
                                         value="{{ old('discount', $product->discount) }}">
+                                </div> --}}
+
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label>Harga</label>
+                                            <input type="number" step="1" name="price" class="form-control"
+                                                value="{{ old('price', number_format($product->price, 0, ',', '.')) }}"
+                                                required>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label>Diskon (%)</label>
+                                            <input type="number" step="1" name="discount" class="form-control"
+                                                value="{{ old('discount', $product->discount) }}">
+                                        </div>
+                                    </div>
                                 </div>
 
                                 <div class="form-group">
@@ -90,7 +125,7 @@
                                     </select>
                                 </div>
 
-                                <div class="form-group">
+                                {{-- <div class="form-group">
                                     <label>Created Date</label>
                                     <input type="datetime-local" class="form-control"
                                         value="{{ \Carbon\Carbon::parse($product->CreatedDate)->format('Y-m-d\TH:i') }}"
@@ -113,15 +148,15 @@
                                     <input type="text" name="LastUpdatedBy" class="form-control"
                                         value="{{ auth()->user()->name }}" readonly>
                                 </div>
-                            </div>
+                            </div> --}}
 
-                            <div class="card-footer text-right">
-                                <button type="submit" class="btn btn-primary px-4">Update</button>
-                                <button type="button" class="btn btn-info px-4 ml-2"
-                                    onclick="window.print()">Print</button>
-                                <a href="{{ route('data_products.index') }}"
-                                    class="btn btn-secondary px-4 ml-2">Kembali</a>
-                            </div>
+                                <div class="card-footer text-right">
+                                    <button type="submit" class="btn btn-primary px-4">Update</button>
+                                    <button type="button" class="btn btn-info px-4 ml-2"
+                                        onclick="window.print()">Print</button>
+                                    <a href="{{ route('data_products.index') }}"
+                                        class="btn btn-secondary px-4 ml-2">Kembali</a>
+                                </div>
                         </form>
 
                     </div>

@@ -10,6 +10,13 @@
 @endpush
 
 @section('content')
+    <div class="text-center my-5">
+        <h1 class="display-5 fw-bold">Layanan Make Up Terbaik dari <span
+                style="color: #f1683a;font-weight: bold;
+                    line-height: 1.3em;">MUA.KU</span></h1>
+        <p class="text-muted" style="font-size: 16px;">Temukan berbagai pilihan layanan make up profesional untuk setiap momen spesial Anda.</p>
+        <hr class="w-25 mx-auto my-4">
+    </div>
     <div class="container">
         <div class="row mt-4 justify-content-center">
             @foreach ($data as $item)

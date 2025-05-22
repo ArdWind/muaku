@@ -156,7 +156,7 @@ class VerificationController extends Controller
             . "JANGAN berikan kode ini ke siapapun!\n\n"
             . "Terima kasih 🙏";
 
-        // Kirim via API Fonnte
+        // Kirim via API Ojan
         $response = Http::post('https://node.kalbe.my.id/api/send-message', [
             'apikey'   => 'haiojan2542',
             'mtype'    => 'text',

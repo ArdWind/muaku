@@ -34,7 +34,7 @@
                             @method('PUT')
 
                             <div class="card-body">
-                                <div class="form-group">
+                                {{-- <div class="form-group">
                                     <label>Nama</label>
                                     <input type="text" name="name" value="{{ $user->name }}" class="form-control"
                                         required>
@@ -43,11 +43,28 @@
                                 <div class="form-group">
                                     <label>Email</label>
                                     <input type="email" value="{{ $user->email }}" class="form-control" disabled>
+                                </div> --}}
+
+                                <div class="row">
+                                    <div class="col-sm-6"> {{-- Atur lebar kolom sesuai kebutuhan, contoh: col-sm-6 untuk setengah lebar --}}
+                                        <div class="form-group">
+                                            <label>Nama</label>
+                                            <input type="text" name="name" value="{{ $user->name }}"
+                                                class="form-control" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6"> {{-- Atur lebar kolom sesuai kebutuhan, contoh: col-sm-6 untuk setengah lebar --}}
+                                        <div class="form-group">
+                                            <label>Email</label>
+                                            <input type="email" value="{{ $user->email }}" class="form-control" disabled>
+                                        </div>
+                                    </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label>Phone</label>
-                                    <input type="tel" value="{{ $user->Phone }}" class="form-control" required>
+                                    <input type="tel" name="Phone" value="{{ $user->Phone }}" class="form-control"
+                                        required>
                                 </div>
 
                                 <div class="form-group">
@@ -70,7 +87,7 @@
                                     </select>
                                 </div>
 
-                                <div class="form-group">
+                                {{-- <div class="form-group">
                                     <label>Created Date</label>
                                     <input type="datetime-local"
                                         value="{{ \Carbon\Carbon::parse($user->CreatedDate)->format('Y-m-d\TH:i') }}"
@@ -94,14 +111,14 @@
                                     <input type="text" name="LastUpdatedBy" value="{{ auth()->user()->name }}"
                                         class="form-control" readonly>
                                 </div>
-                            </div>
+                            </div> --}}
 
-                            <div class="card-footer text-right">
-                                <button type="submit" class="btn btn-primary px-4">Update</button>
-                                <button type="button" class="btn btn-info px-4 ml-2"
-                                    onclick="window.print()">Print</button>
-                                <a href="{{ url('/data-users') }}" class="btn btn-secondary px-4 ml-2">Kembali</a>
-                            </div>
+                                <div class="card-footer text-right">
+                                    <button type="submit" class="btn btn-primary px-4">Update</button>
+                                    <button type="button" class="btn btn-info px-4 ml-2"
+                                        onclick="window.print()">Print</button>
+                                    <a href="{{ url('/data-users') }}" class="btn btn-secondary px-4 ml-2">Kembali</a>
+                                </div>
                         </form>
                     </div>
                 </div>

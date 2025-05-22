@@ -34,6 +34,7 @@
                                 <table id="tabel1" class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
+                                            <th>Aksi</th>
                                             <th>No</th>
                                             <th>Nama</th>
                                             <th>Email</th>
@@ -43,21 +44,11 @@
                                             <th>Created By</th>
                                             <th>Updated Date</th>
                                             <th>Updated By</th>
-                                            <th>Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach ($users as $index => $user)
                                             <tr>
-                                                <td>{{ $index + 1 }}</td>
-                                                <td>{{ $user->name }}</td>
-                                                <td>{{ $user->email }}</td>
-                                                <td>{{ $user->role }}</td>
-                                                <td>{{ $user->Status }}</td>
-                                                <td>{{ $user->CreatedDate }}</td>
-                                                <td>{{ $user->CreatedBy }}</td>
-                                                <td>{{ $user->LastUpdatedDate }}</td>
-                                                <td>{{ $user->LastUpdatedBy }}</td>
                                                 <td>
                                                     <a href="{{ route('data_users.edit', $user->id) }}"
                                                         class="btn btn-sm btn-warning" title="Edit">
@@ -74,6 +65,15 @@
                                                         </button>
                                                     </form>
                                                 </td>
+                                                <td>{{ $index + 1 }}</td>
+                                                <td>{{ $user->name }}</td>
+                                                <td>{{ $user->email }}</td>
+                                                <td>{{ $user->role }}</td>
+                                                <td>{{ $user->Status }}</td>
+                                                <td>{{ $user->CreatedDate }}</td>
+                                                <td>{{ $user->CreatedBy }}</td>
+                                                <td>{{ $user->LastUpdatedDate }}</td>
+                                                <td>{{ $user->LastUpdatedBy }}</td>
                                             </tr>
                                         @endforeach
                                     </tbody>

@@ -19,7 +19,7 @@
 
 <body>
 
-    <header>
+    <header id="home">
         <nav class="glass-nav">
             <!-- logo -->
             <div class="HeaderLogo">
@@ -27,9 +27,10 @@
             </div>
 
             <div class="HeaderMenu">
-                <a href="">Home</a>
-                <a href="">Contacts</a>
-                <a href="">Info</a>
+                <a href="#home">Home</a>
+                <a href="#products">Products</a>
+                <a href="#info-usaha">Info</a>
+                <a href="#footer">Contacts</a>
             </div>
 
             <!-- Kanan: Hallo, User + Logout -->
@@ -60,8 +61,9 @@
                         laborum natus unde. Ut, exercitationem eum aperiam illo illum laudantium?
                     </div>
                     <div class="buttons">
-                        <button>SEE MORE</button>
-                        <button>SUBSCRIBE</button>
+                        <a href="{{ route('detail.wedding') }}">
+                            <button>SEE MORE</button>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -78,8 +80,9 @@
                         laborum natus unde. Ut, exercitationem eum aperiam illo illum laudantium?
                     </div>
                     <div class="buttons">
-                        <button>SEE MORE</button>
-                        <button>SUBSCRIBE</button>
+                        <a href="{{ route('detail.braid') }}">
+                            <button>SEE MORE</button>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -96,8 +99,9 @@
                         laborum natus unde. Ut, exercitationem eum aperiam illo illum laudantium?
                     </div>
                     <div class="buttons">
-                        <button>SEE MORE</button>
-                        <button>SUBSCRIBE</button>
+                        <a href="{{ route('detail.eng') }}">
+                            <button>SEE MORE</button>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -114,8 +118,9 @@
                         laborum natus unde. Ut, exercitationem eum aperiam illo illum laudantium?
                     </div>
                     <div class="buttons">
-                        <button>SEE MORE</button>
-                        <button>SUBSCRIBE</button>
+                        <a href="{{ route('detail.grad') }}">
+                            <button>SEE MORE</button>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -179,9 +184,43 @@
     </div>
 
     {{-- Konten Halaman --}}
-    <main>
+    <main id="products" class="product-section">
         @yield('content')
     </main>
+
+    <!-- Section Info Usaha -->
+    <section id="info-usaha" class="info-usaha">
+        <h2>Tentang MUA.KU</h2>
+        <p>
+            MUA.KU adalah layanan make up artist profesional yang melayani berbagai acara penting seperti pernikahan,
+            wisuda, lamaran, dan lainnya. Kami berkomitmen memberikan hasil terbaik untuk setiap momen spesial Anda.
+        </p>
+    </section>
+
+    <!-- Footer -->
+    <footer id="footer" class="site-footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>MUA.KU</h4>
+                <p>Jalan Mawar No. 123, Bandung</p>
+                <p>Email: info@muaku.id</p>
+                <p>Telepon: +62 812-3456-7890</p>
+            </div>
+
+            <div class="footer-section">
+                <h4>Media Sosial</h4>
+                <p><a href="https://instagram.com/muaku_official" target="_blank"><i class="fab fa-instagram"></i>
+                        Instagram</a></p>
+                <p><a href="https://wa.me/6281234567890" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                </p>
+                <p><a href="https://facebook.com/muaku" target="_blank"><i class="fab fa-facebook"></i> Facebook</a>
+                </p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; {{ date('Y') }} MUA.KU. All rights reserved.
+        </div>
+    </footer>
 
     {{-- JavaScript --}}
     <script src="{{ asset('adminlte/plugins/jquery/jquery.min.js') }}"></script>

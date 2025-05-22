@@ -1,46 +1,38 @@
 @extends('layout.master')
 
 @section('data')
-    <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
         <section class="content-header">
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>DataTables</h1>
+                        <h1>Gallery</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">DataTables</li>
+                            <li class="breadcrumb-item active">Gallery</li>
                         </ol>
                     </div>
                 </div>
-            </div><!-- /.container-fluid -->
+            </div>
         </section>
 
-        <!-- Main content -->
         <section class="content">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">DataTable all Product</h3>
+                                <h3 class="card-title">Data Gallery</h3>
                             </div>
-                            <!-- /.card-header -->
                             <div class="card-body">
                                 <table id="tabel2" class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
                                             <th>Aksi</th>
-                                            {{-- <th>No</th> --}}
-                                            <th>Kode</th>
                                             <th>Nama</th>
-                                            <th>Harga</th>
-                                            <th>Disc(%)</th>
-                                            <th>Status</th>
+                                            <th>Kategori</th>
                                             <th>Gambar</th>
                                             <th>Created</th>
                                             <th>Created By</th>
@@ -49,84 +41,78 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($products as $product)
+                                        @foreach ($galleries as $gallery)
                                             @php
                                                 $statusLabels = [
                                                     101 => 'Active',
                                                     102 => 'Inactive',
-                                                    103 => 'Out of Stock',
+                                                    103 => 'Hidden',
                                                     104 => 'Archived',
-                                                    105 => 'Draft',
                                                 ];
                                             @endphp
                                             <tr>
                                                 <td>
-                                                    <a href="{{ route('data_products.edit', $product->id) }}"
+                                                    <a href="{{ route('data_galeries.edit', $gallery->id) }}"
                                                         class="btn btn-sm btn-warning" title="Edit">
                                                         <i class="fas fa-edit"></i>
                                                     </a>
-                                                    <form action="{{ route('data_products.destroy', $product->id) }}"
+                                                    <form action="{{ route('data_galeries.destroy', $gallery->id) }}"
                                                         method="POST" style="display:inline-block;">
                                                         @csrf
                                                         @method('DELETE')
                                                         <button class="btn btn-sm btn-danger"
-                                                            onclick="return confirm('Yakin hapus produk ini?')"
+                                                            onclick="return confirm('Yakin hapus galeri ini?')"
                                                             title="Hapus">
                                                             <i class="fas fa-trash-alt"></i>
                                                         </button>
                                                     </form>
                                                 </td>
-                                                {{-- <td>{{ $loop->iteration }}</td> --}}
-                                                <td>{{ $product->product_code }}</td>
-                                                <td>{{ $product->product_name }}</td>
-                                                <td>{{ number_format($product->price) }}</td>
-                                                <td>{{ $product->discount }}</td>
-                                                <td>{{ $statusLabels[$product->Status] ?? 'Unknown' }}</td>
-                                                {{-- <td>{{ $product->Status == 100 ? 'Aktif' : 'Nonaktif' }}</td> --}}
-                                                <td>
-                                                    @if ($product->product_img)
-                                                        <img src="{{ asset($product->product_img) }}" alt="Product Image"
-                                                            width="50">
+                                                <td>{{ $gallery->name }}</td>
+                                                <td>{{ $gallery->category }}</td>
+                                                <td style="height: 50px;">
+                                                    @php
+                                                        $extension = pathinfo($gallery->image_path, PATHINFO_EXTENSION);
+                                                    @endphp
+
+                                                    @if (in_array($extension, ['mp4', 'webm', 'ogg']))
+                                                        <div onclick="playVideo(this)"
+                                                            style="cursor: pointer; position: relative; display: flex; align-items: center; justify-content: center; height: 100%; max-height: 60px;">
+                                                            <i class="fas fa-play-circle"
+                                                                style="color: black; font-size: 20px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 2;"></i>
+                                                            <video style="display: none; height: 100%; width: auto;"
+                                                                controls>
+                                                                <source src="{{ asset($gallery->image_path) }}"
+                                                                    type="video/{{ $extension }}">
+                                                            </video>
+                                                        </div>
+                                                    @elseif ($gallery->image_path)
+                                                        <div
+                                                            style="display: flex; align-items: center; justify-content: center; height: 60px;">
+                                                            <img src="{{ asset($gallery->image_path) }}" alt="Gallery Image"
+                                                                style="max-height: 60px; width: auto;">
+                                                        </div>
                                                     @endif
                                                 </td>
-                                                <td>{{ $product->CreatedDate }}</td>
-                                                <td>{{ $product->CreatedBy }}</td>
-                                                <td>{{ $product->LastUpdatedDate }}</td>
-                                                <td>{{ $product->LastUpdatedBy }}</td>
+                                                <td>{{ $gallery->CreatedDate }}</td>
+                                                <td>{{ $gallery->CreatedBy }}</td>
+                                                <td>{{ $gallery->LastUpdatedDate }}</td>
+                                                <td>{{ $gallery->LastUpdatedBy }}</td>
                                             </tr>
                                         @endforeach
                                     </tbody>
                                 </table>
                             </div>
-                            <!-- /.card-body -->
                         </div>
-                        <!-- /.card -->
                     </div>
-                    <!-- /.col -->
                 </div>
-                <!-- /.row -->
             </div>
-            <!-- /.container-fluid -->
         </section>
-        <!-- /.content -->
-
-        <!-- Control Sidebar -->
-        <aside class="control-sidebar control-sidebar-dark">
-            <!-- Control sidebar content goes here -->
-        </aside>
-        <!-- /.control-sidebar -->
     </div>
-    <!-- /.content-wrapper -->
 @endsection
 
 @section('js')
-    <!-- jQuery -->
     <script src="{{ asset('adminlte/plugins/jquery/jquery.min.js') }}"></script>
-    <!-- Bootstrap 4 -->
     <script src="{{ asset('adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-    <!-- Bootstrap CDN sebagai alternatif -->
-    {{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script> --}}
-    <!-- DataTables  & Plugins -->
     <script src="{{ asset('adminlte/plugins/datatables/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('adminlte/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
     <script src="{{ asset('adminlte/plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
@@ -139,34 +125,9 @@
     <script src="{{ asset('adminlte/plugins/datatables-buttons/js/buttons.html5.min.js') }}"></script>
     <script src="{{ asset('adminlte/plugins/datatables-buttons/js/buttons.print.min.js') }}"></script>
     <script src="{{ asset('adminlte/plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
-    <!-- AdminLTE App -->
-    {{-- <script src="{{asset('adminlte/dist/js/adminlte.min.js')}}"></script> --}}
-
-    <!-- Page specific script -->
-    {{-- <script>
-  $(function () {
-    const commonOptions = {
-      responsive: true,
-      lengthChange: false,
-      autoWidth: false,
-      paging: true,
-      searching: true,
-      ordering: true,
-      info: true,
-      buttons: ["copy", "csv", "excel", "pdf", "print", "colvis"]
-    };
-
-    const tabel1 = $("#tabel1").DataTable(commonOptions);
-    tabel1.buttons().container().appendTo('#tabel1_wrapper .col-md-6:eq(0)');
-
-    const tabel2 = $("#tabel2").DataTable(commonOptions);
-    tabel2.buttons().container().appendTo('#tabel2_wrapper .col-md-6:eq(0)');
-  });
-</script> --}}
 
     <script>
         $(function() {
-            // Konfigurasi umum untuk semua DataTable
             const commonOptions = {
                 responsive: true,
                 lengthChange: false,
@@ -177,7 +138,6 @@
                 info: true,
             };
 
-            // Fungsi untuk membuat DataTable dengan tombol "Add New"
             function createDataTableWithAddButton(selector, createUrl, buttonLabel = 'Add New') {
                 const table = $(selector).DataTable({
                     ...commonOptions,
@@ -192,12 +152,20 @@
                     ]
                 });
 
-                // Menempatkan tombol di posisi yang benar
                 table.buttons().container().appendTo(`${selector}_wrapper .col-md-6:eq(0)`);
             }
 
-            // Contoh penggunaan untuk dua tabel berbeda
-            createDataTableWithAddButton('#tabel2', "{{ route('data_products.create') }}", 'Add New Product');
+            createDataTableWithAddButton('#tabel2', "{{ route('data_galeries.create') }}", 'Add New Gallery');
         });
+    </script>
+    <script>
+        function playVideo(container) {
+            const icon = container.querySelector('i');
+            const video = container.querySelector('video');
+
+            icon.style.display = 'none';
+            video.style.display = 'block';
+            video.play();
+        }
     </script>
 @endsection
