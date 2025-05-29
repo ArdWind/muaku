@@ -83,11 +83,61 @@
                 </ul>
                 </li>
                 @if (auth()->user()->role == 'customer')
-                    <li class="nav-item">
-                        <a href="/detail/wedding"
-                            class="nav-link {{ request()->is('/detail/wedding*') ? 'active' : '' }}">
+                    {{-- Menu untuk Detail (menggunakan Treeview/Dropdown AdminLTE) --}}
+                    {{-- 'menu-open' akan membuat dropdown terbuka jika salah satu anaknya aktif --}}
+                    <li class="nav-item {{ request()->is('detail/*') ? 'menu-open' : '' }}">
+                        {{-- 'active' akan membuat item parent terhighlight jika salah satu anaknya aktif --}}
+                        <a href="#" class="nav-link {{ request()->is('detail/*') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-image"></i>
-                            <p>Detail</p>
+                            <p>
+                                Detail
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            {{-- Sub-menu Detail Wedding --}}
+                            <li class="nav-item">
+                                {{-- Gunakan route() helper untuk link yang lebih dinamis dan aman --}}
+                                <a href="{{ route('detail.wedding') }}"
+                                    class="nav-link {{ request()->is('detail/wedding*') ? 'active' : '' }}">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Detail Wedding</p>
+                                </a>
+                            </li>
+                            {{-- Sub-menu Detail Bridesmaid (sebelumnya Anda sebut Braid) --}}
+                            <li class="nav-item">
+                                <a href="{{ route('detail.braid') }}"
+                                    class="nav-link {{ request()->is('detail/brides*') ? 'active' : '' }}">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Detail Bridesmaid</p>
+                                </a>
+                            </li>
+                            {{-- Sub-menu Detail Engagement Day --}}
+                            <li class="nav-item">
+                                <a href="{{ route('detail.eng') }}"
+                                    class="nav-link {{ request()->is('detail/eng*') ? 'active' : '' }}">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Detail Engagement Day</p>
+                                </a>
+                            </li>
+                            {{-- Sub-menu Detail Graduation --}}
+                            <li class="nav-item">
+                                <a href="{{ route('detail.grad') }}"
+                                    class="nav-link {{ request()->is('detail/grad*') ? 'active' : '' }}">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Detail Graduation</p>
+                                </a>
+                            </li>
+                            {{-- Tambahkan detail lain di sini jika ada --}}
+                        </ul>
+                    </li>
+
+                    {{-- Menu untuk Booking --}}
+                    <li class="nav-item">
+                        {{-- Pastikan ini adalah rute yang benar untuk halaman booking Anda --}}
+                        <a href="/booking" class="nav-link {{ request()->is('booking*') ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-calendar-alt"></i> {{-- Icon yang cocok untuk Booking --}}
+                            <p>Booking</p>
                         </a>
                     </li>
                 @endif

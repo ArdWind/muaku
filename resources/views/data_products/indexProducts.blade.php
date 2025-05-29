@@ -66,12 +66,11 @@
                                                         <i class="fas fa-edit"></i>
                                                     </a>
                                                     <form action="{{ route('data_products.destroy', $product->id) }}"
-                                                        method="POST" style="display:inline-block;">
+                                                        method="POST" class="delete-form" {{-- Tambahkan kelas ini --}}
+                                                        style="display:inline-block;">
                                                         @csrf
                                                         @method('DELETE')
-                                                        <button class="btn btn-sm btn-danger"
-                                                            onclick="return confirm('Yakin hapus produk ini?')"
-                                                            title="Hapus">
+                                                        <button type="submit" class="btn btn-sm btn-danger" title="Hapus">
                                                             <i class="fas fa-trash-alt"></i>
                                                         </button>
                                                     </form>
@@ -141,28 +140,6 @@
     <script src="{{ asset('adminlte/plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
     <!-- AdminLTE App -->
     {{-- <script src="{{asset('adminlte/dist/js/adminlte.min.js')}}"></script> --}}
-
-    <!-- Page specific script -->
-    {{-- <script>
-  $(function () {
-    const commonOptions = {
-      responsive: true,
-      lengthChange: false,
-      autoWidth: false,
-      paging: true,
-      searching: true,
-      ordering: true,
-      info: true,
-      buttons: ["copy", "csv", "excel", "pdf", "print", "colvis"]
-    };
-
-    const tabel1 = $("#tabel1").DataTable(commonOptions);
-    tabel1.buttons().container().appendTo('#tabel1_wrapper .col-md-6:eq(0)');
-
-    const tabel2 = $("#tabel2").DataTable(commonOptions);
-    tabel2.buttons().container().appendTo('#tabel2_wrapper .col-md-6:eq(0)');
-  });
-</script> --}}
 
     <script>
         $(function() {

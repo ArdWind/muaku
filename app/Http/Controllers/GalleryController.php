@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Exception;
 use Illuminate\Http\Request;
 use App\Models\Gallery;
 use Illuminate\Support\Facades\Auth;
@@ -16,6 +17,30 @@ class GalleryController extends Controller
     
         // Tidak perlu generate URL jika image_path sudah URL penuh
         return view('detail.weding', compact('galleries'));
+    }
+
+    public function graduationDetail()
+    {
+        $galleries = Gallery::where('category', 'GRADUATION')->get();
+    
+        // Tidak perlu generate URL jika image_path sudah URL penuh
+        return view('detail.grad', compact('galleries'));
+    }
+
+    public function bridesDetail()
+    {
+        $galleries = Gallery::where('category', 'BRIDESMAID')->get();
+    
+        // Tidak perlu generate URL jika image_path sudah URL penuh
+        return view('detail.braid', compact('galleries'));
+    }
+
+    public function engDetail()
+    {
+        $galleries = Gallery::where('category', 'ENGAGEMENT DAY')->get();
+    
+        // Tidak perlu generate URL jika image_path sudah URL penuh
+        return view('detail.eng', compact('galleries'));
     }
 
     /**
@@ -100,16 +125,30 @@ class GalleryController extends Controller
      */
     public function destroy($id)
     {
-        $gallery = Gallery::findOrFail($id);
+        try {
+            $gallery = Gallery::findOrFail($id);
 
-        if ($gallery->image_path) {
-            $fileName = basename(parse_url($gallery->image_path, PHP_URL_PATH));
-            Miniojan::delete('galery', $fileName);
+            if ($gallery->image_path) {
+                $fileName = basename(parse_url($gallery->image_path, PHP_URL_PATH));
+                // Pastikan 'galery' adalah nama bucket yang benar di MinIO Anda
+                Miniojan::delete('galery', $fileName);
+            }
+
+            $gallery->delete();
+
+            return redirect()->route('data_galeries.index')->with('success', 'Galeri berhasil dihapus.');
+        } catch (Exception $e) {
+            // Tangani potensi error (misalnya, masalah koneksi MinIO, atau relasi data)
+            return redirect()->route('data_galeries.index')->with('error', 'Gagal menghapus galeri: ' . $e->getMessage());
         }
 
-        $gallery->delete();
-
-        return redirect()->route('data_galeries.index')->with('success', 'Galeri berhasil dihapus.');
+        // $gallery = Gallery::findOrFail($id);
+        // if ($gallery->image_path) {
+        //     $fileName = basename(parse_url($gallery->image_path, PHP_URL_PATH));
+        //     Miniojan::delete('galery', $fileName);
+        // }
+        // $gallery->delete();
+        // return redirect()->route('data_galeries.index')->with('success', 'Galeri berhasil dihapus.');
     }
 
     /**

@@ -37,15 +37,9 @@ Route::delete('/data-galeries/{gallery}', [GalleryController::class, 'destroy'])
 
 // produk-detail
 Route::get('/detail/wedding', [GalleryController::class, 'weddingDetail'])->name('detail.wedding');
-Route::get('/detail/grad', function () {
-    return view('detail.grad');
-})->name('detail.grad');
-Route::get('/detail/eng', function () {
-    return view('detail.eng');
-})->name('detail.eng');
-Route::get('/detail/braid', function () {
-    return view('detail.braid');
-})->name('detail.braid');
+Route::get('/detail/graduation', [GalleryController::class, 'graduationDetail'])->name('detail.grad');
+Route::get('/detail/brides', [GalleryController::class, 'bridesDetail'])->name('detail.braid');
+Route::get('/detail/engagement', [GalleryController::class, 'engDetail'])->name('detail.eng');
 
 Route::get('/', fn() => view('welcome'));
 

@@ -57,12 +57,11 @@
                                                         <i class="fas fa-edit"></i>
                                                     </a>
                                                     <form action="{{ route('data_galeries.destroy', $gallery->id) }}"
-                                                        method="POST" style="display:inline-block;">
+                                                        method="POST" class="delete-form" {{-- Tambahkan kelas ini --}}
+                                                        style="display:inline-block;">
                                                         @csrf
                                                         @method('DELETE')
-                                                        <button class="btn btn-sm btn-danger"
-                                                            onclick="return confirm('Yakin hapus galeri ini?')"
-                                                            title="Hapus">
+                                                        <button type="submit" class="btn btn-sm btn-danger" title="Hapus">
                                                             <i class="fas fa-trash-alt"></i>
                                                         </button>
                                                     </form>

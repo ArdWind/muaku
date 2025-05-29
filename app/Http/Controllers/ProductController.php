@@ -6,10 +6,12 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\User;
+use Exception;
 use Fauzantaqiyuddin\LaravelMinio\Facades\Miniojan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
+use PhpParser\Node\Stmt\TryCatch;
 
 class ProductController extends Controller
 {
@@ -184,22 +186,38 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        $product = Product::findOrFail($id);
+        try {
+            $product = Product::findOrFail($id);
+            
+            if ($product->product_img) {
+                // Ambil nama file dari URL gambar
+                $fileName = basename(parse_url($product->product_img, PHP_URL_PATH));
+                Miniojan::delete('galery', $fileName);
+            }
 
-        // Hapus gambar produk jika ada
-        // if ($product->product_img && File::exists(public_path($product->product_img))) {
-        //     File::delete(public_path($product->product_img));
-        // }
-
-        // Hapus gambar dari MinIO jika ada
-        if ($product->product_img) {
-            // Ambil nama file dari URL gambar
-            $fileName = basename(parse_url($product->product_img, PHP_URL_PATH));
-            Miniojan::delete('galery', $fileName);
+            $product->delete();
+            return redirect()->route('data_products.index')->with('success', 'Produk berhasil dihapus.');
+        } catch (Exception $e) {
+            // Tangani potensi error (misalnya, jika produk memiliki relasi data)
+            return redirect()->route('data_products.index')->with('error', 'Gagal menghapus produk: ' . $e->getMessage());
         }
-        // Hapus produk dari database
-        $product->delete();
 
-        return redirect()->route('data_products.index')->with('success', 'Produk berhasil dihapus.');
+        // $product = Product::findOrFail($id);
+
+        // // Hapus gambar produk jika ada
+        // // if ($product->product_img && File::exists(public_path($product->product_img))) {
+        // //     File::delete(public_path($product->product_img));
+        // // }
+
+        // // Hapus gambar dari MinIO jika ada
+        // if ($product->product_img) {
+        //     // Ambil nama file dari URL gambar
+        //     $fileName = basename(parse_url($product->product_img, PHP_URL_PATH));
+        //     Miniojan::delete('galery', $fileName);
+        // }
+        // // Hapus produk dari database
+        // $product->delete();
+
+        // return redirect()->route('data_products.index')->with('success', 'Produk berhasil dihapus.');
     }
 }

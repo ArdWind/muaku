@@ -55,6 +55,16 @@
                                                         <i class="fas fa-edit"></i>
                                                     </a>
                                                     <form action="{{ route('data_users.destroy', $user->id) }}"
+                                                        method="POST"
+                                                        class="delete-form" {{-- Tambahkan kelas ini --}}
+                                                        style="display:inline-block;">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn btn-sm btn-danger" title="Hapus">
+                                                            <i class="fas fa-trash-alt"></i>
+                                                        </button>
+                                                    </form>
+                                                    {{-- <form action="{{ route('data_users.destroy', $user->id) }}"
                                                         method="POST" style="display:inline-block;">
                                                         @csrf
                                                         @method('DELETE')
@@ -63,7 +73,7 @@
                                                             title="Hapus">
                                                             <i class="fas fa-trash-alt"></i>
                                                         </button>
-                                                    </form>
+                                                    </form> --}}
                                                 </td>
                                                 <td>{{ $index + 1 }}</td>
                                                 <td>{{ $user->name }}</td>

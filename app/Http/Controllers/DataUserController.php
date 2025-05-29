@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use Exception;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Product;
@@ -55,7 +56,7 @@ class DataUserController extends Controller
             'CreatedBy'         => Auth::user()->name,
         ]);
 
-        return redirect()->route('data_users.index')->with('success', 'User berhasil ditambahkan.');
+        return redirect()->route(route: 'data_users.index')->with('success', 'User berhasil ditambahkan.');
     }
 
     /**
@@ -104,7 +105,16 @@ class DataUserController extends Controller
      */
     public function destroy(User $user)
     {
-        $user->delete();
-        return redirect()->route('data_users.index')->with('success', 'User berhasil dihapus.');
+        try {
+            $user->delete();
+            // Pesan sukses akan ditangkap oleh SweetAlert2 di layout.master
+            return redirect()->route('data_users.index')->with('success', 'User berhasil dihapus.');
+        } catch (Exception $e) {
+            // Tangani error, misalnya jika user tidak bisa dihapus karena relasi data
+            // Pesan error ini juga akan ditangkap oleh SweetAlert2 di layout.master
+            return redirect()->route('data_users.index')->with('error', 'Gagal menghapus user: ' . $e->getMessage());
+        }
+        // $user->delete();
+        // return redirect()->route('data_users.index')->with('success', 'User berhasil dihapus.');
     }
 }

@@ -157,8 +157,8 @@ class VerificationController extends Controller
             . "Terima kasih 🙏";
 
         // Kirim via API Ojan
-        $response = Http::post('https://node.kalbe.my.id/api/send-message', [
-            'apikey'   => 'haiojan2542',
+        $response = Http::post(config('whatsapp.api_url'), [ // <<< Menggunakan config()
+            'apikey'   => config('whatsapp.api_key'),        // <<< Menggunakan config()
             'mtype'    => 'text',
             'receiver' => $formattedPhone,
             'text'     => $text,
@@ -172,4 +172,3 @@ class VerificationController extends Controller
         }
     }
 }
-
