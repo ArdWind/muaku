@@ -10,7 +10,7 @@ class ProductController extends Controller
 {
     public function index()
     {
-        $data = Product::select('product_name', 'description', 'product_img', 'price', 'discount')->get();
+        $data = Product::select('id', 'product_name', 'description', 'product_img', 'price', 'discount')->get();
         return view('frontEnd.product.index', compact('data'));
     }
 }

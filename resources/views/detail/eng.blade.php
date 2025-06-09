@@ -101,12 +101,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>E-commerce</h1>
+                        <h1>Engagement</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">E-commerce</li>
+                            <li class="breadcrumb-item"><a href="{{ url('/customer') }}">Home</a></li>
+                            <li class="breadcrumb-item active">Engagement</li>
                         </ol>
                     </div>
                 </div>
@@ -177,59 +177,116 @@
 
                         <!-- Product Info -->
                         <div class="col-12 col-sm-6">
-                            <h3 class="my-3">LOWA Men’s Renegade GTX Mid Hiking Boots</h3>
-                            <p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu
-                                stumptown aliqua butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh
-                                mi, qui irure terr.</p>
+                            <h3 class="my-3">Detail Layanan Make Up Engagement (Tunangan)</h3>
+                            <p class="text-justify">
+                                Abadikan momen spesial pertunangan Anda dengan riasan wajah yang sempurna dari MUA.KU.
+                                Kami menyediakan layanan make up *engagement* profesional yang dirancang khusus untuk hari
+                                lamaran Anda,
+                                memastikan Anda tampil **elegan, menawan, dan memancarkan kebahagiaan** di hadapan keluarga
+                                dan calon pasangan.
+                                Sentuhan Youvanda akan membuat Anda bersinar sepanjang acara.
+                            </p>
 
                             <hr>
-                            <!-- Colors -->
-                            <h4>Available Colors</h4>
+
+                            <h4>Pilihan Gaya Riasan Engagement</h4>
                             <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                                @foreach (['green', 'blue', 'purple', 'red', 'orange'] as $i => $color)
-                                    <label class="btn btn-default text-center {{ $i == 0 ? 'active' : '' }}">
-                                        <input type="radio" name="color_option" autocomplete="off"
-                                            {{ $i == 0 ? 'checked' : '' }}>
-                                        {{ ucfirst($color) }}<br>
-                                        <i class="fas fa-circle fa-2x text-{{ $color }}"></i>
-                                    </label>
-                                @endforeach
+                                {{-- Sesuaikan pilihan gaya riasan engagement di sini --}}
+                                <label class="btn btn-default text-center active">
+                                    <input type="radio" name="engagement_style_option" autocomplete="off" checked>
+                                    {{-- Menggunakan ikon 'eye' untuk Soft Glam --}}
+                                    <strong><i class="fas fa-eye"></i> Soft Glam</strong><br>
+                                    <small>Fokus pada Mata & Bibir</small>
+                                </label>
+                                <label class="btn btn-default text-center">
+                                    <input type="radio" name="engagement_style_option" autocomplete="off">
+                                    <strong><i class="fas fa-leaf"></i> Fresh Natural</strong><br>
+                                    <small>Tampil Cantik Alami</small>
+                                </label>
+                                <label class="btn btn-default text-center">
+                                    <input type="radio" name="engagement_style_option" autocomplete="off">
+                                    {{-- Menggunakan ikon 'moon' atau 'sun' sebagai alternatif untuk Korean Glow agar muncul --}}
+                                    <strong><i class="fas fa-moon"></i> Korean Glow</strong><br>
+                                    <small>Kulit Sehat Bercahaya</small>
+                                </label>
+                                {{-- Tambahkan lebih banyak gaya jika diperlukan --}}
                             </div>
 
-                            <!-- Size -->
-                            <h4 class="mt-3">Size <small>Please select one</small></h4>
+                            <h4 class="mt-3">Detail Paket Layanan <small>Pilih yang sesuai</small></h4>
                             <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                                @foreach (['S' => 'Small', 'M' => 'Medium', 'L' => 'Large', 'XL' => 'Xtra-Large'] as $code => $label)
-                                    <label class="btn btn-default text-center">
-                                        <input type="radio" name="size_option" autocomplete="off">
-                                        <span class="text-xl">{{ $code }}</span><br>{{ $label }}
-                                    </label>
-                                @endforeach
+                                {{-- Contoh paket layanan untuk engagement --}}
+                                <label class="btn btn-default text-center">
+                                    <input type="radio" name="package_option" autocomplete="off">
+                                    <strong><i class="fas fa-gem"></i> Paket Simple</strong><br>
+                                    <small>Rias & Retouch</small>
+                                </label>
+                                <label class="btn btn-default text-center active">
+                                    <input type="radio" name="package_option" autocomplete="off" checked>
+                                    <strong><i class="fas fa-ring"></i> Paket Plus</strong><br>
+                                    <small>Rias + Hairdo/Hijabdo</small>
+                                </label>
+                                <label class="btn btn-default text-center">
+                                    <input type="radio" name="package_option" autocomplete="off">
+                                    <strong><i class="fas fa-hands-helping"></i> Paket Premium</strong><br>
+                                    <small>Rias + Hairdo + Keluarga</small>
+                                </label>
                             </div>
 
-                            <!-- Price -->
                             <div class="bg-gray py-2 px-3 mt-4">
-                                <h2 class="mb-0">$80.00</h2>
-                                <h4 class="mt-0"><small>Ex Tax: $80.00</small></h4>
+                                <h2 class="mb-0">Mulai dari Rp 750.000,-</h2> {{-- Contoh harga untuk engagement --}}
+                                <h4 class="mt-0"><small>Harga dapat disesuaikan dengan detail paket dan lokasi.</small>
+                                </h4>
                             </div>
 
-                            <!-- Buttons -->
                             <div class="mt-4">
-                                <div class="btn btn-primary btn-lg btn-flat">
-                                    <i class="fas fa-cart-plus fa-lg mr-2"></i> Add to Cart
-                                </div>
-                                <div class="btn btn-default btn-lg btn-flat">
-                                    <i class="fas fa-heart fa-lg mr-2"></i> Add to Wishlist
-                                </div>
+                                {{-- Tombol "Pesan Layanan Ini" dialihkan ke halaman /customer dan section #products --}}
+                                <a href="{{ url('/customer#products') }}" class="btn btn-primary btn-lg btn-flat">
+                                    <i class="fas fa-calendar-check fa-lg mr-2"></i> Pesan Layanan Ini
+                                </a>
+
+                                {{-- Tombol "Tanya Lebih Lanjut" dialihkan ke WhatsApp --}}
+                                {{-- Pastikan nomor WA ini adalah nomor MUA.KU yang benar --}}
+                                <a href="https://wa.me/6281212345678?text=Halo%20MUA.KU,%20saya%20tertarik%20dengan%20layanan%20make%20up%20engagement%20Anda.%20Bisakah%20saya%20bertanya%20lebih%20lanjut?"
+                                    class="btn btn-default btn-lg btn-flat" target="_blank">
+                                    <i class="fab fa-whatsapp fa-lg mr-2"></i> Tanya Lebih Lanjut
+                                </a>
                             </div>
 
-                            <!-- Share -->
                             <div class="mt-4 product-share">
-                                @foreach (['facebook-square', 'twitter-square', 'envelope-square', 'rss-square'] as $icon)
-                                    <a href="#" class="text-gray">
-                                        <i class="fab fa-{{ $icon }} fa-2x"></i>
-                                    </a>
-                                @endforeach
+                                <p class="mb-2">Bagikan Layanan Ini:</p>
+                                @php
+                                    // Mendapatkan URL halaman saat ini
+                                    $currentPageUrl = url()->current();
+                                    // Meng-encode URL agar aman untuk parameter query di link sharing
+                                    $encodedPageUrl = urlencode($currentPageUrl);
+                                    // Teks ajakan untuk dibagikan (disesuaikan untuk engagement)
+                                    $shareTextEngagement = urlencode(
+                                        'Siap tampil memesona di hari lamaranmu dengan make up dari MUA.KU!',
+                                    );
+                                    $shareTextLongEngagement = urlencode(
+                                        'MUA.KU hadir untuk menyempurnakan penampilan spesialmu di acara engagement. Yuk, cek detail layanannya di sini:',
+                                    );
+                                @endphp
+
+                                {{-- Tombol X (Twitter) Share --}}
+                                <a href="https://twitter.com/intent/tweet?url={{ $encodedPageUrl }}&text={{ $shareTextEngagement }}"
+                                    class="text-gray" target="_blank" title="Bagikan ke X (Twitter)">
+                                    <i class="fab fa-twitter-square fa-2x mr-2"></i>
+                                </a>
+
+                                {{-- Tombol Instagram (link ke profil) --}}
+                                {{-- Ganti 'yovanda.makeup' dengan username Instagram MUA.KU yang sebenarnya --}}
+                                <a href="https://www.instagram.com/yovanda.makeup" class="text-gray" target="_blank"
+                                    title="Kunjungi Instagram MUA.KU">
+                                    <i class="fab fa-instagram-square fa-2x mr-2"></i>
+                                </a>
+
+                                {{-- Tombol WhatsApp Share --}}
+                                {{-- Pastikan nomor WA untuk share ini jika berbeda dengan tombol "Tanya Lebih Lanjut" --}}
+                                <a href="https://wa.me/6289673906621/?text={{ $shareTextLongEngagement }}%20{{ $encodedPageUrl }}"
+                                    class="text-gray" target="_blank" title="Bagikan via WhatsApp">
+                                    <i class="fab fa-whatsapp-square fa-2x mr-2"></i>
+                                </a>
                             </div>
                         </div>
                     </div>

@@ -101,12 +101,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>E-commerce</h1>
+                        <h1>Graduation</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">E-commerce</li>
+                            <li class="breadcrumb-item"><a href="{{ url('/customer') }}">Home</a></li>
+                            <li class="breadcrumb-item active">Graduation</li>
                         </ol>
                     </div>
                 </div>
@@ -177,59 +177,113 @@
 
                         <!-- Product Info -->
                         <div class="col-12 col-sm-6">
-                            <h3 class="my-3">LOWA Men’s Renegade GTX Mid Hiking Boots</h3>
-                            <p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu
-                                stumptown aliqua butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh
-                                mi, qui irure terr.</p>
+                            <h3 class="my-3">Detail Layanan Make Up Wisuda</h3>
+                            <p class="text-justify">
+                                Rayakan momen kelulusan Anda dengan penampilan terbaik dari MUA.KU. Kami menyediakan
+                                layanan make up wisuda profesional yang dirancang khusus untuk hari spesial Anda.
+                                Dengan sentuhan Youvanda, kami memastikan setiap wisudawati tampil **cantik, percaya diri,
+                                dan memancarkan kebahagiaan** di hari kelulusan.
+                            </p>
 
                             <hr>
-                            <!-- Colors -->
-                            <h4>Available Colors</h4>
+
+                            <h4>Pilihan Gaya Riasan Wisuda</h4>
                             <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                                @foreach (['green', 'blue', 'purple', 'red', 'orange'] as $i => $color)
-                                    <label class="btn btn-default text-center {{ $i == 0 ? 'active' : '' }}">
-                                        <input type="radio" name="color_option" autocomplete="off"
-                                            {{ $i == 0 ? 'checked' : '' }}>
-                                        {{ ucfirst($color) }}<br>
-                                        <i class="fas fa-circle fa-2x text-{{ $color }}"></i>
-                                    </label>
-                                @endforeach
+                                {{-- Pilihan Gaya Riasan Wisuda --}}
+                                <label class="btn btn-default text-center active">
+                                    <input type="radio" name="graduation_style_option" autocomplete="off" checked>
+                                    <strong><i class="fas fa-palette"></i> Natural Fresh</strong><br>
+                                    <small>Tampil Alami & Cerah</small>
+                                </label>
+                                <label class="btn btn-default text-center">
+                                    <input type="radio" name="graduation_style_option" autocomplete="off">
+                                    <strong><i class="fas fa-star"></i> Glam Graduation</strong><br>
+                                    <small>Elegan & Berkilau</small>
+                                </label>
+                                <label class="btn btn-default text-center">
+                                    <input type="radio" name="graduation_style_option" autocomplete="off">
+                                    <strong><i class="fas fa-spa"></i> Korean Look</strong><br>
+                                    <small>Simple & Modern</small>
+                                </label>
+                                {{-- Tambahkan lebih banyak gaya jika diperlukan --}}
                             </div>
 
-                            <!-- Size -->
-                            <h4 class="mt-3">Size <small>Please select one</small></h4>
+                            <h4 class="mt-3">Detail Paket Layanan <small>Pilih yang sesuai</small></h4>
                             <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                                @foreach (['S' => 'Small', 'M' => 'Medium', 'L' => 'Large', 'XL' => 'Xtra-Large'] as $code => $label)
-                                    <label class="btn btn-default text-center">
-                                        <input type="radio" name="size_option" autocomplete="off">
-                                        <span class="text-xl">{{ $code }}</span><br>{{ $label }}
-                                    </label>
-                                @endforeach
+                                {{-- Contoh paket layanan untuk wisuda --}}
+                                <label class="btn btn-default text-center">
+                                    <input type="radio" name="package_option" autocomplete="off">
+                                    <strong><i class="fas fa-user-graduate"></i> Paket Standard</strong><br>
+                                    <small>Rias Wisudawati</small>
+                                </label>
+                                <label class="btn btn-default text-center active">
+                                    <input type="radio" name="package_option" autocomplete="off" checked>
+                                    <strong><i class="fas fa-graduation-cap"></i> Paket Plus</strong><br>
+                                    <small>Rias Wisudawati + Hairdo</small>
+                                </label>
+                                <label class="btn btn-default text-center">
+                                    <input type="radio" name="package_option" autocomplete="off">
+                                    <strong><i class="fas fa-award"></i> Paket Premium</strong><br>
+                                    <small>Rias + Hairdo + Retouch</small>
+                                </label>
                             </div>
 
-                            <!-- Price -->
                             <div class="bg-gray py-2 px-3 mt-4">
-                                <h2 class="mb-0">$80.00</h2>
-                                <h4 class="mt-0"><small>Ex Tax: $80.00</small></h4>
+                                <h2 class="mb-0">Mulai dari Rp 500.000,-</h2> {{-- Contoh harga untuk wisuda --}}
+                                <h4 class="mt-0"><small>Harga dapat disesuaikan dengan detail paket dan
+                                        lokasi.</small>
+                                </h4>
                             </div>
 
-                            <!-- Buttons -->
                             <div class="mt-4">
-                                <div class="btn btn-primary btn-lg btn-flat">
-                                    <i class="fas fa-cart-plus fa-lg mr-2"></i> Add to Cart
-                                </div>
-                                <div class="btn btn-default btn-lg btn-flat">
-                                    <i class="fas fa-heart fa-lg mr-2"></i> Add to Wishlist
-                                </div>
+                                {{-- Tombol "Pesan Layanan Ini" dialihkan ke halaman /customer dan section #products --}}
+                                <a href="{{ url('/customer#products') }}" class="btn btn-primary btn-lg btn-flat">
+                                    <i class="fas fa-calendar-check fa-lg mr-2"></i> Pesan Layanan Ini
+                                </a>
+
+                                {{-- Tombol "Tanya Lebih Lanjut" dialihkan ke WhatsApp (tetap sama) --}}
+                                {{-- Pastikan nomor WA ini adalah nomor MUA.KU --}}
+                                <a href="https://wa.me/6281212345678?text=Halo%20MUA.KU,%20saya%20tertarik%20dengan%20layanan%20make%20up%20wisuda%20Anda.%20Bisakah%20saya%20bertanya%20lebih%20lanjut?"
+                                    class="btn btn-default btn-lg btn-flat" target="_blank">
+                                    <i class="fab fa-whatsapp fa-lg mr-2"></i> Tanya Lebih Lanjut
+                                </a>
                             </div>
 
-                            <!-- Share -->
                             <div class="mt-4 product-share">
-                                @foreach (['facebook-square', 'twitter-square', 'envelope-square', 'rss-square'] as $icon)
-                                    <a href="#" class="text-gray">
-                                        <i class="fab fa-{{ $icon }} fa-2x"></i>
-                                    </a>
-                                @endforeach
+                                <p class="mb-2">Bagikan Layanan Ini:</p>
+                                @php
+                                    // Mendapatkan URL halaman saat ini
+                                    $currentPageUrl = url()->current();
+                                    // Meng-encode URL agar aman untuk parameter query di link sharing
+                                    $encodedPageUrl = urlencode($currentPageUrl);
+                                    // Teks ajakan untuk dibagikan (disesuaikan untuk wisuda)
+                                    $shareTextGraduation = urlencode(
+                                        'Rayakan kelulusanmu dengan make up menawan dari MUA.KU!',
+                                    );
+                                    $shareTextLongGraduation = urlencode(
+                                        'MUA.KU siap menyempurnakan hari wisudamu dengan riasan flawless! Yuk, intip detail layanannya di sini:',
+                                    );
+                                @endphp
+
+                                {{-- Tombol X (Twitter) Share --}}
+                                <a href="https://twitter.com/intent/tweet?url={{ $encodedPageUrl }}&text={{ $shareTextGraduation }}"
+                                    class="text-gray" target="_blank" title="Bagikan ke X (Twitter)">
+                                    <i class="fab fa-twitter-square fa-2x mr-2"></i>
+                                </a>
+
+                                {{-- Tombol Instagram (link ke profil, bukan share langsung dari web) --}}
+                                {{-- Ganti 'yovanda.makeup' dengan username Instagram MUA.KU yang sebenarnya --}}
+                                <a href="https://www.instagram.com/yovanda.makeup" class="text-gray" target="_blank"
+                                    title="Kunjungi Instagram MUA.KU">
+                                    <i class="fab fa-instagram-square fa-2x mr-2"></i>
+                                </a>
+
+                                {{-- Tombol WhatsApp Share --}}
+                                {{-- Pastikan nomor WA untuk share ini jika berbeda dengan tombol "Tanya Lebih Lanjut" --}}
+                                <a href="https://wa.me/6289673906621/?text={{ $shareTextLongGraduation }}%20{{ $encodedPageUrl }}"
+                                    class="text-gray" target="_blank" title="Bagikan via WhatsApp">
+                                    <i class="fab fa-whatsapp-square fa-2x mr-2"></i>
+                                </a>
                             </div>
                         </div>
                     </div>

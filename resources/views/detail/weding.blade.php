@@ -101,12 +101,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>E-commerce</h1>
+                        <h1>Wedding</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">E-commerce</li>
+                            <li class="breadcrumb-item"><a href="{{ url('/customer') }}">Home</a></li>
+                            <li class="breadcrumb-item active">Wedding</li>
                         </ol>
                     </div>
                 </div>
@@ -177,59 +177,108 @@
 
                         <!-- Product Info -->
                         <div class="col-12 col-sm-6">
-                            <h3 class="my-3">LOWA Men’s Renegade GTX Mid Hiking Boots</h3>
-                            <p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu
-                                stumptown aliqua butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh
-                                mi, qui irure terr.</p>
+                            <h3 class="my-3">Detail Layanan Make Up Wedding</h3>
+                            <p class="text-justify">
+                                Wujudkan impian pernikahan Anda dengan riasan yang memukau dari MUA.KU. Kami menyediakan
+                                layanan make up wedding profesional yang dirancang khusus untuk hari teristimewa Anda.
+                                Dengan sentuhan Youvanda, kami memastikan setiap pengantin tampil <strong>elegan, flawless,
+                                    dan memancarkan aura kebahagiaan</strong> yang tak terlupakan.
+                            </p>
 
                             <hr>
-                            <!-- Colors -->
-                            <h4>Available Colors</h4>
+
+                            <h4>Pilihan Gaya Riasan Wedding</h4>
                             <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                                @foreach (['green', 'blue', 'purple', 'red', 'orange'] as $i => $color)
-                                    <label class="btn btn-default text-center {{ $i == 0 ? 'active' : '' }}">
-                                        <input type="radio" name="color_option" autocomplete="off"
-                                            {{ $i == 0 ? 'checked' : '' }}>
-                                        {{ ucfirst($color) }}<br>
-                                        <i class="fas fa-circle fa-2x text-{{ $color }}"></i>
-                                    </label>
-                                @endforeach
+                                {{-- Kita bisa tampilkan beberapa pilihan gaya, Anda bisa sesuaikan isinya --}}
+                                <label class="btn btn-default text-center active">
+                                    <input type="radio" name="wedding_style_option" autocomplete="off" checked>
+                                    <strong><i class="fas fa-landmark"></i> Adat Tradisional</strong><br>
+                                    <small>Khas Indonesia</small>
+                                </label>
+                                <label class="btn btn-default text-center">
+                                    <input type="radio" name="wedding_style_option" autocomplete="off">
+                                    <strong><i class="fas fa-gem"></i> Modern Glam</strong><br>
+                                    <small>Elegansi Kontemporer</small>
+                                </label>
+                                <label class="btn btn-default text-center">
+                                    <input type="radio" name="wedding_style_option" autocomplete="off">
+                                    <strong><i class="fas fa-leaf"></i> Natural Radiance</strong><br>
+                                    <small>Cantik Alami</small>
+                                </label>
+                                {{-- Anda bisa menambahkan lebih banyak gaya di sini --}}
                             </div>
 
-                            <!-- Size -->
-                            <h4 class="mt-3">Size <small>Please select one</small></h4>
+                            <h4 class="mt-3">Detail Paket Layanan <small>Pilih yang sesuai</small></h4>
                             <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                                @foreach (['S' => 'Small', 'M' => 'Medium', 'L' => 'Large', 'XL' => 'Xtra-Large'] as $code => $label)
-                                    <label class="btn btn-default text-center">
-                                        <input type="radio" name="size_option" autocomplete="off">
-                                        <span class="text-xl">{{ $code }}</span><br>{{ $label }}
-                                    </label>
-                                @endforeach
+                                {{-- Contoh paket layanan, Anda bisa membuatnya dinamis dari data jika ada --}}
+                                <label class="btn btn-default text-center">
+                                    <input type="radio" name="package_option" autocomplete="off">
+                                    <strong><i class="fas fa-female"></i> Paket A</strong><br>
+                                    <small>Rias Pengantin</small> {{-- Ganti ini ke <small> untuk konsistensi --}}
+                                </label>
+                                <label class="btn btn-default text-center active">
+                                    <input type="radio" name="package_option" autocomplete="off" checked>
+                                    <strong><i class="fas fa-user-friends"></i> Paket B</strong><br>
+                                    <small>Rias Pengantin + Ibu</small> {{-- Ganti ini ke <small> untuk konsistensi --}}
+                                </label>
+                                <label class="btn btn-default text-center">
+                                    <input type="radio" name="package_option" autocomplete="off">
+                                    <strong><i class="fas fa-handshake"></i> Paket C</strong><br>
+                                    <small>All Inclusive</small> {{-- Ganti ini ke <small> untuk konsistensi --}}
+                                </label>
                             </div>
 
-                            <!-- Price -->
                             <div class="bg-gray py-2 px-3 mt-4">
-                                <h2 class="mb-0">$80.00</h2>
-                                <h4 class="mt-0"><small>Ex Tax: $80.00</small></h4>
+                                <h2 class="mb-0">Mulai dari Rp 3.500.000,-</h2> {{-- Contoh harga --}}
+                                <h4 class="mt-0"><small>Harga dapat disesuaikan dengan detail paket dan lokasi.</small>
+                                </h4>
                             </div>
 
-                            <!-- Buttons -->
                             <div class="mt-4">
-                                <div class="btn btn-primary btn-lg btn-flat">
-                                    <i class="fas fa-cart-plus fa-lg mr-2"></i> Add to Cart
-                                </div>
-                                <div class="btn btn-default btn-lg btn-flat">
-                                    <i class="fas fa-heart fa-lg mr-2"></i> Add to Wishlist
-                                </div>
+                                {{-- Tombol "Pesan Layanan Ini" dialihkan ke halaman /customer dan section #products --}}
+                                <a href="{{ url('/customer#products') }}" class="btn btn-primary btn-lg btn-flat">
+                                    <i class="fas fa-calendar-check fa-lg mr-2"></i> Pesan Layanan Ini
+                                </a>
+
+                                {{-- Tombol "Tanya Lebih Lanjut" dialihkan ke WhatsApp (tetap sama) --}}
+                                <a href="https://wa.me/6281212345678?text=Halo%20MUA.KU,%20saya%20tertarik%20dengan%20layanan%20make%20up%20wedding%20Anda.%20Bisakah%20saya%20bertanya%20lebih%20lanjut?"
+                                    class="btn btn-default btn-lg btn-flat" target="_blank">
+                                    <i class="fab fa-whatsapp fa-lg mr-2"></i> Tanya Lebih Lanjut
+                                </a>
                             </div>
 
-                            <!-- Share -->
                             <div class="mt-4 product-share">
-                                @foreach (['facebook-square', 'twitter-square', 'envelope-square', 'rss-square'] as $icon)
-                                    <a href="#" class="text-gray">
-                                        <i class="fab fa-{{ $icon }} fa-2x"></i>
-                                    </a>
-                                @endforeach
+                                <p class="mb-2">Bagikan Layanan Ini:</p>
+                                @php
+                                    // Mendapatkan URL halaman saat ini
+                                    $currentPageUrl = url()->current();
+                                    // Meng-encode URL agar aman untuk parameter query di link sharing
+                                    $encodedPageUrl = urlencode($currentPageUrl);
+                                    // Teks ajakan untuk dibagikan (bisa disesuaikan)
+                                    $shareText = urlencode('Yuk, intip layanan make up wedding impian dari MUA.KU!');
+                                    $shareTextLong = urlencode(
+                                        'MUA.KU menghadirkan sentuhan ajaib untuk hari pernikahan Anda. Hasilnya elegan dan flawless! Yuk, cek detail layanannya di sini:',
+                                    );
+                                @endphp
+
+                                {{-- Tombol Twitter Share --}}
+                                <a href="https://twitter.com/intent/tweet?url={{ $encodedPageUrl }}&text={{ $shareText }}"
+                                    class="text-gray" target="_blank" title="Bagikan ke Twitter">
+                                    <i class="fab fa-twitter-square fa-2x mr-2"></i>
+                                </a>
+
+                                {{-- Tombol Instagram (link ke profil, bukan share langsung dari web) --}}
+                                {{-- Instagram tidak memiliki fitur share halaman web langsung seperti FB/Twitter/WA --}}
+                                <a href="https://www.instagram.com/yovanda.makeup" class="text-gray" target="_blank"
+                                    title="Kunjungi Instagram MUA.KU">
+                                    <i class="fab fa-instagram-square fa-2x mr-2"></i>
+                                </a>
+
+                                {{-- Tombol WhatsApp Share --}}
+                                <a href="https://wa.me/6289673906621/?text={{ $shareTextLong }}%20{{ $encodedPageUrl }}"
+                                    class="text-gray" target="_blank" title="Bagikan via WhatsApp">
+                                    <i class="fab fa-whatsapp-square fa-2x mr-2"></i>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -257,7 +306,7 @@
     </section>
     </div>
 
-    @section('scripts')
+@section('scripts')
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         function scrollThumbs(amount) {
@@ -294,5 +343,5 @@
             });
         });
     </script>
-    @endsection
+@endsection
 @endsection

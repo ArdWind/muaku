@@ -67,8 +67,13 @@ class AuthController extends Controller
         }
 
         Auth::login($user);
-        if ($user->role == 'customer') return redirect('/customer');
-        return Redirect('/customer');
+
+        if ($user->role == 'admin' || $user->role == 'staff') {
+            return redirect('/dashboard');
+        } elseif ($user->role == 'customer') {
+            return redirect('/customer');
+        }
+        return redirect('/login');
     }
 
     public function logout(Request $request)

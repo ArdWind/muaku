@@ -26,4 +26,11 @@ class AppServiceProvider extends ServiceProvider
             return User::findOrFail($value);
         });
     }
+
+    protected function mapApiRoutes(): void
+    {
+        Route::middleware('api')
+            ->prefix('api') // Ini yang menambahkan awalan /api/
+            ->group(base_path('routes/api.php')); // Ini yang memuat file api.php
+    }
 }

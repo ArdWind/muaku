@@ -412,7 +412,7 @@ header a:hover {
 /* Section Info Usaha */
 .info-usaha {
     padding: 50px 20px;
-    background: #FDF3E6;
+    background: #fdf3e6;
     text-align: center;
 }
 
@@ -458,4 +458,72 @@ header a:hover {
     text-align: center;
     margin-top: 20px;
     font-size: 14px;
+}
+
+/* Styling untuk Section Info Usaha */
+.info-usaha {
+    background-color: #fdf3e6; /* Warna latar belakang lembut */
+    color: #343a40; /* Warna teks gelap */
+    padding: 60px 0; /* Padding atas dan bawah */
+}
+
+.info-usaha .section-title {
+    /* font-family: "Playfair Display", serif;
+    font-size: 2.5rem; */
+    font-weight: bold;
+    color: #495057;
+    position: relative;
+    padding-bottom: 15px;
+}
+
+.info-usaha .section-title::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background-color: #f06292;
+    border-radius: 5px;
+}
+
+.info-usaha .owner-photo {
+    width: 350px; /* Ukuran foto owner */
+    height: 350px;
+    object-fit: cover; /* Memastikan gambar tidak terdistorsi */
+    border: 5px solid #fff; /* Border putih */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); /* Sedikit bayangan */
+    transition: transform 0.3s ease-in-out;
+}
+
+.info-usaha .owner-photo:hover {
+    transform: scale(1.05); /* Efek zoom saat hover */
+}
+
+.info-usaha h4 {
+    color: #343a40;
+    font-weight: 600;
+    margin-top: 15px;
+}
+
+.info-usaha p.lead {
+    font-size: 1.25rem;
+    line-height: 1.8;
+}
+
+.info-usaha p {
+    font-size: 0.85rem;
+    line-height: 1.7;
+    margin-bottom: 1rem;
+}
+
+/* Penyesuaian responsif untuk teks */
+@media (max-width: 767.98px) {
+    .info-usaha .section-title {
+        font-size: 2rem;
+    }
+    .info-usaha p.lead {
+        font-size: 1.1rem;
+    }
 }

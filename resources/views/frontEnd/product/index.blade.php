@@ -14,7 +14,8 @@
         <h1 class="display-5 fw-bold">Layanan Make Up Terbaik dari <span
                 style="color: #f1683a;font-weight: bold;
                     line-height: 1.3em;">MUA.KU</span></h1>
-        <p class="text-muted" style="font-size: 16px;">Temukan berbagai pilihan layanan make up profesional untuk setiap momen spesial Anda.</p>
+        <p class="text-muted" style="font-size: 16px;">Temukan berbagai pilihan layanan make up profesional untuk setiap momen
+            spesial Anda.</p>
         <hr class="w-25 mx-auto my-4">
     </div>
     <div class="container">
@@ -50,10 +51,17 @@
                                     <h6>Rp {{ number_format($item->price) }}</h6>
                                 @endif
                             </div>
-
-                            <a href="#"
-                                class="btn btn-primary fw-bold d-flex align-items-center justify-content-center"
-                                style="height: 40px; width: 80px;">Book</a>
+                            @auth
+                                {{-- Tampilan untuk user yang sudah login --}}
+                                <a href="{{ route('order.create', $item->id) }}"
+                                    class="btn btn-primary fw-bold d-flex align-items-center justify-content-center"
+                                    style="height: 40px; width: 80px;">Book</a>
+                            @else
+                                {{-- Tampilan untuk user yang belum login (guest) --}}
+                                <a href="/login"
+                                    class="btn btn-primary fw-bold d-flex align-items-center justify-content-center"
+                                    style="height: 40px; width: 80px;">Book</a>
+                            @endauth
                         </div>
                     </div>
                 </div>

@@ -79,6 +79,14 @@
                                 <p>Galery</p>
                             </a>
                         </li>
+                        {{-- Menu untuk Orders (Staff/Admin) --}}
+                        <li class="nav-item">
+                            <a href="{{ route('order.staff.index') }}"
+                                class="nav-link {{ request()->is('staff/orders*') ? 'active' : '' }}">
+                                <i class="nav-icon fas fa-clipboard-list"></i>
+                                <p>Orders</p>
+                            </a>
+                        </li>
                     @endif
                 </ul>
                 </li>
@@ -134,8 +142,9 @@
 
                     {{-- Menu untuk Booking --}}
                     <li class="nav-item">
-                        {{-- Pastikan ini adalah rute yang benar untuk halaman booking Anda --}}
-                        <a href="/booking" class="nav-link {{ request()->is('booking*') ? 'active' : '' }}">
+                        {{-- Pastikan ini adalah rute yang benar untuk halaman daftar pesanan Anda --}}
+                        <a href="{{ route('order.customer.pay') }}"
+                            class="nav-link {{ request()->is('orders/my-list*') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-calendar-alt"></i> {{-- Icon yang cocok untuk Booking --}}
                             <p>Booking</p>
                         </a>
