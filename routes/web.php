@@ -123,10 +123,10 @@ Route::get('/order/create/{product}', [OrderController::class, 'create'])->name(
 Route::post('/order', [OrderController::class, 'store'])->name('order.store');
 
 // Contoh rute untuk halaman sukses setelah pembayaran (akan diarahkan setelah Midtrans)
-Route::get('/order/{order}/pay', [OrderController::class, 'customerPay'])->name('order.customer.pay');
+// Route::get('/order/{order}/pay', [OrderController::class, 'customerPay'])->name('order.customer.pay');
 
 // Rute untuk menampilkan form pemesanan produk tertentu
-Route::get('/order/create/{product}', [OrderController::class, 'create'])->name('order.create');
+// Route::get('/order/create/{product}', [OrderController::class, 'create'])->name('order.create');
 
 // Rute untuk menyimpan data pemesanan
 Route::post('/order', [OrderController::class, 'store'])->name('order.store');
@@ -163,9 +163,3 @@ Route::get('/order/{order}/pay-now', [OrderController::class, 'initiatePayment']
 // Asumsi: Rute ini akan dilindungi oleh middleware 'auth' dan 'role:staff' atau semacamnya nanti
 Route::get('/staff/orders', [ApproveOrderController::class, 'index'])->name('order.staff.index');
 Route::post('/staff/orders/{order}/update-status', [ApproveOrderController::class, 'updateOrderStatus'])->name('order.staff.update_status');
-
-// routes/web.php
-// Route::post('/midtrans-notification', [OrderController::class, 'handleMidtransNotification'])->name('midtrans.notification')->withoutMiddleware(['auth', 'csrf']);
-// Route::post('/midtrans-notification', [OrderController::class, 'handleMidtransNotification'])
-//     ->name('midtrans.notification')
-//     ->withoutMiddleware(['csrf']);

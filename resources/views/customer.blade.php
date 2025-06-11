@@ -29,7 +29,14 @@
             <div class="HeaderMenu">
                 <a href="#home">Home</a>
                 <a href="#products">Products</a>
-                <a href="/order/customer/pay">Booking</a>
+                @auth
+                    {{-- Tampilan untuk user yang sudah login --}}
+                    <a href="{{ route('order.customer.pay') }}">Booking</a>
+                @else
+                    {{-- Tampilan untuk user yang belum login (guest) --}}
+                    <a href="/login">Booking</a>
+                @endauth
+
                 <a href="#info-usaha">Info</a>
                 <a href="#footer">Contacts</a>
             </div>
