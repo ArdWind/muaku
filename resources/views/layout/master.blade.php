@@ -37,6 +37,14 @@
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('adminlte/dist/css/adminlte.min.css') }}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.6/dist/sweetalert2.min.css">
+    
+    {{-- TAMBAHKAN CSS FULLCALENDAR DI SINI --}}
+    {{-- Path ini sangat penting, pastikan sesuai dengan struktur folder Anda --}}
+    <link rel="stylesheet" href="{{ asset('adminlte/plugins/fullcalendar/main.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('adminlte/plugins/fullcalendar-daygrid/main.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('adminlte/plugins/fullcalendar-timegrid/main.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('adminlte/plugins/fullcalendar-bootstrap/main.min.css') }}">
+
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">

@@ -270,6 +270,12 @@
                 <td class="label">TOTAL:</td>
                 <td>Rp {{ number_format($order->TotalPrice, 0, ',', '.') }}</td>
             </tr>
+            {{-- Bagian Terbilang --}}
+            <tr class="terbilang-row">
+                <td colspan="2"> {{-- Gunakan colspan="2" agar terbilang mengambil 2 kolom (label dan value) --}}
+                    <strong>Terbilang:</strong> {{ ucwords($terbilangTotal) }} Rupiah
+                </td>
+            </tr>
         </table>
 
         <div class="notes-section">

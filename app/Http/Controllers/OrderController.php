@@ -12,6 +12,7 @@ use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Str;
+use App\Helpers\NumberConverter;
 
 // Midtrans classes - uncommented for active integration
 use Midtrans\Config;
@@ -232,7 +233,8 @@ class OrderController extends Controller
      */
     public function showInvoiceHtml(Order $order)
     {
-        return view('order.customer.invoice_pdf', compact('order'));
+        $terbilangTotal = NumberConverter::terbilang($order->TotalPrice);
+        return view('order.customer.invoice_pdf', compact('order', 'terbilangTotal'));
     }
 
     /**
@@ -244,9 +246,10 @@ class OrderController extends Controller
     {
         // Pastikan nama file bersih dari karakter path (seperti / atau \)
         // Str::slug akan mengubah string menjadi format yang aman untuk URL/nama file
+        $terbilangTotal = NumberConverter::terbilang($order->TotalPrice);
         $filename = 'invoice_' . Str::slug($order->InvoiceNumber) . '.pdf';
 
-        $pdf = Pdf::loadView('order.customer.invoice_pdf', compact('order'));
+        $pdf = Pdf::loadView('order.customer.invoice_pdf', compact('order', 'terbilangTotal'));
 
         // Mengembalikan PDF untuk ditampilkan di browser
         return $pdf->stream($filename);
@@ -261,9 +264,10 @@ class OrderController extends Controller
     {
         // Pastikan nama file bersih dari karakter path (seperti / atau \)
         // Str::slug akan mengubah string menjadi format yang aman untuk URL/nama file
+        $terbilangTotal = NumberConverter::terbilang($order->TotalPrice);
         $filename = 'invoice_' . Str::slug($order->InvoiceNumber) . '.pdf';
 
-        $pdf = Pdf::loadView('order.customer.invoice_pdf', compact('order'));
+        $pdf = Pdf::loadView('order.customer.invoice_pdf', compact('order', 'terbilangTotal'));
 
         // Mengembalikan PDF untuk diunduh
         return $pdf->download($filename);

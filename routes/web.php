@@ -129,7 +129,7 @@ Route::post('/order', [OrderController::class, 'store'])->name('order.store');
 // Route::get('/order/create/{product}', [OrderController::class, 'create'])->name('order.create');
 
 // Rute untuk menyimpan data pemesanan
-Route::post('/order', [OrderController::class, 'store'])->name('order.store');
+// Route::post('/order', [OrderController::class, 'store'])->name('order.store');
 
 // Rute untuk menampilkan daftar semua order milik pengguna yang sedang login (sekarang ini adalah halaman "Booking" Anda)
 Route::get('/orders/my-list', [OrderController::class, 'customerPay'])->name('order.customer.pay');
